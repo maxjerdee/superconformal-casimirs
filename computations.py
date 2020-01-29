@@ -80,8 +80,8 @@ def check():
 	if check:
 		print("S4Commute Clear on", num_check, "cases")
 
-N = 8
-mfactors = [5184,60000,12288,5184,1,1,1,1,1] # Factors we multiply the QC by for each N to make rougly integral
+N = 2
+mfactors = [5184,2500,1024,324,64,4,1,4,64] # Factors we multiply the QC by for each N to clarify pattern
 types, second_range, full_dims, full_dim, basis, dbasis, index_dim, iD, index_type, bosonic_num, dim = make_arrays(N)
 start = time()
 #compute_traces(N)

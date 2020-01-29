@@ -30,7 +30,7 @@ def find_contribution(types, index_ranges, in1, in2):
 		for ind in con0:
 			if ind[0] <= ind[1] <= ind[2] <= ind[3]:
 				cons[str(ind[0]) + " " + str(ind[1]) + " " + str(ind[2]) + " " + str(ind[3])] = \
-				contribution[ind[0],ind[1],ind[2],ind[3]]
+				contribution[ind[0],ind[1],ind[2],ind[3]]/24
 	return cons
 
 def to_latex(string): # Convert the string form (i.e. "M_0^1 M_1^0 Q_23 S^2_3" -> "M_\alpha^\beta M_\beta^\alpha Q_{\gamma r} S^\gamma{}_r")
@@ -90,8 +90,8 @@ def mini_format(num):
 	return "("+str(Fraction(num).limit_denominator(10000))+")"
 	
 
-N = 0
-mfactors = [5184*24,60000,12288*2,5184*3/2,768*2,96,1,96,96*16] # Factors we multiply the QC by for each N to make rougly integral
+N = 2
+mfactors = [5184,2500,1024,324,64,4,1,4,64] # Factors we multiply the QC by for each N to clarify pattern
 types, second_range, full_dims, full_dim, basis, dbasis, index_dim, iD, index_type, bosonic_num, dim = make_arrays(N)
 start = time()
 #compute_traces(N)
@@ -238,7 +238,7 @@ if res[1] == 1:
 	print(ans)
 
 # Print as Latex
-latex = "C_{\\mathcal{N} ="+ str(N) + "}^{(4)}&= \\frac{1}{" + str(round(mfactors[N]/24)) + "}\\text{ssym}\\Big["
+latex = "C_{\\mathcal{N} ="+ str(N) + "}^{(4)}&= \\frac{1}{" + str(mfactors[N]) + "}\\text{ssym}\\Big["
 inc = 0
 for i in range(len(labels)):
 	if res[0][i] != 0:
@@ -248,7 +248,7 @@ for i in range(len(labels)):
 		if inc % 4 == 3:
 			latex += "\\\\ &"
 		inc += 1
-text_file = open("TestOutput.txt", "w")
+text_file = open("Output.txt", "w")
 text_file.write(latex + "\\Big]")
 text_file.close()
 print("Time: ", time() - start) 
