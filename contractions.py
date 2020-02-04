@@ -81,16 +81,17 @@ def format_number(z):
 		return mini_format(real) + " + " + mini_format(imag) + "i"
 
 def mini_format(num):
+	num = float(num)
 	if np.abs(np.abs(num) - 1) < 10**(-6): # Floating Point
-		return str(Fraction(num).limit_denominator(10000))[:-1]
+		return str(Fraction(str(num)).limit_denominator(10000))[:-1]
 	if np.abs(num - round(num)) < 10**(-3):
-		return str(Fraction(num).limit_denominator(10000))
+		return str(Fraction(str(num)).limit_denominator(10000))
 	if num < 0:
-		return "-("+str(Fraction(num).limit_denominator(10000))[1:]+")"
-	return "("+str(Fraction(num).limit_denominator(10000))+")"
+		return "-("+str(Fraction(str(num)).limit_denominator(10000))[1:]+")"
+	return "("+str(Fraction(str(num)).limit_denominator(10000))+")"
 	
 
-N = 2
+N = 0
 mfactors = [5184,2500,1024,324,64,4,1,4,64] # Factors we multiply the QC by for each N to clarify pattern
 types, second_range, full_dims, full_dim, basis, dbasis, index_dim, iD, index_type, bosonic_num, dim = make_arrays(N)
 start = time()
